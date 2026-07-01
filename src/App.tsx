@@ -12,6 +12,7 @@ import Admin from '@/pages/Admin'
 export default function App() {
   return (
     <Routes>
+      {/* Routes WITH shared Navbar/Footer Layout */}
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -20,8 +21,10 @@ export default function App() {
         <Route path="/space" element={<Space />} />
         <Route path="/news" element={<News />} />
         <Route path="/curriculum" element={<Curriculum />} />
-        <Route path="/admin" element={<Admin />} />
       </Route>
+
+      {/* Admin route WITHOUT shared layout */}
+      <Route path="/admin" element={<Admin />} />
     </Routes>
   )
 }
