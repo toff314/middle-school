@@ -7,6 +7,13 @@ interface NavbarProps {
   onSearchOpen: () => void
 }
 
+const navLinks = [
+  { label: '关于', to: '/about' },
+  { label: '小镇生活方式', to: '/life' },
+  { label: '团队', to: '/team' },
+  { label: '空间环境', to: '/space' },
+]
+
 export default function Navbar({ onMenuOpen, onSearchOpen }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
 
@@ -26,7 +33,7 @@ export default function Navbar({ onMenuOpen, onSearchOpen }: NavbarProps) {
         boxShadow: scrolled ? '0 2px 10px rgba(0,0,0,0.1)' : 'none',
       }}
     >
-      <div className="max-w-page mx-auto h-16 flex items-center justify-between px-6 lg:px-20">
+      <div className="max-w-[1440px] mx-auto h-16 flex items-center justify-between px-6 lg:px-10">
         {/* Left: Logo */}
         <Link to="/" className="flex-shrink-0">
           <span className="text-white font-bold text-xl tracking-wide">未来小镇</span>
@@ -45,41 +52,26 @@ export default function Navbar({ onMenuOpen, onSearchOpen }: NavbarProps) {
         <div className="flex items-center gap-1">
           {/* Desktop nav links */}
           <div className="hidden lg:flex items-center gap-6 mr-4">
-            <Link
-              to="/about"
-              className="text-white text-base font-medium tracking-wider hover:opacity-80 transition-opacity relative group"
-            >
-              关于
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-200" />
-            </Link>
-            <Link
-              to="/life"
-              className="text-white text-base font-medium tracking-wider hover:opacity-80 transition-opacity relative group"
-            >
-              小镇生活方式
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-200" />
-            </Link>
-            <Link
-              to="/team"
-              className="text-white text-base font-medium tracking-wider hover:opacity-80 transition-opacity relative group"
-            >
-              团队
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-200" />
-            </Link>
-            <Link
-              to="/space"
-              className="text-white text-base font-medium tracking-wider hover:opacity-80 transition-opacity relative group"
-            >
-              空间环境
-              <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-200" />
-            </Link>
-            <Link
-              to="/news"
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-white text-base font-medium tracking-wider hover:opacity-80 transition-opacity relative group"
+              >
+                {link.label}
+                <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-200" />
+              </Link>
+            ))}
+            {/* 云校 - 外部链接 */}
+            <a
+              href="https://study.shiyilongyue.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-white text-base font-medium tracking-wider hover:opacity-80 transition-opacity relative group"
             >
               云校
               <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-white group-hover:w-full group-hover:left-0 transition-all duration-200" />
-            </Link>
+            </a>
           </div>
 
           {/* Search icon */}

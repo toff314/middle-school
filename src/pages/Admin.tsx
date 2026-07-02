@@ -9,7 +9,6 @@ import {
   LogOut,
   Lock,
   Eye,
-  TrendingUp,
   Edit3,
   Trash2,
   Plus,
@@ -17,7 +16,6 @@ import {
   Bell,
   Upload,
   Save,
-  X,
 } from 'lucide-react'
 
 /* ────────────────────────────────────────────────

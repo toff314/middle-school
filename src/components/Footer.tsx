@@ -1,24 +1,89 @@
 import { Link } from 'react-router-dom'
+import { ExternalLink } from 'lucide-react'
 
-const footerColumns = [
-  {
-    title: '初识小镇',
-    links: ['我们是谁', '镇长寄语', '空间环境', '课程体系', '团队', '吉祥物', '新闻'],
-  },
-  {
-    title: '探访小镇',
-    links: ['学习中心', '龙樾cool', '龙樾法庭', 'HaKuna Matata', '小镇农场', '游泳馆', '体育馆', '龙樾博物馆', '攀岩墙', '操场', '餐厅', '苏园'],
-  },
+interface FooterLink {
+  label: string
+  to: string
+  external?: boolean
+}
+
+const aboutLinks: FooterLink[] = [
+  { label: '我们是谁', to: '/about' },
+  { label: '镇长寄语', to: '/about/mayor-message' },
+  { label: '空间环境', to: '/space' },
+  { label: '课程体系', to: '/curriculum' },
+  { label: '团队', to: '/team' },
+  { label: '吉祥物', to: '/mascot' },
+  { label: '新闻', to: '/news' },
+  { label: '资源支持', to: '/resources' },
+  { label: '品牌指南', to: '/brand' },
 ]
 
-const footerEvents = ['开放日', '研学', '龙市', '艺术节', '技术节', '体育节', '泼水节', '毕业典礼', '开学典礼', '狂欢节']
-const footerServices = ['在线点餐', '校园卡充值', '网购校服', '家校中心', '家长学院', '校历']
+const visitLinks: FooterLink[] = [
+  { label: '学习中心', to: '/spaces/study-center' },
+  { label: '龙樾cool', to: '/spaces/longyue-cool' },
+  { label: '龙樾法庭', to: '/spaces/court' },
+  { label: 'HaKuna Matata', to: '/spaces/hakuna' },
+  { label: '小镇农场', to: '/spaces/farm' },
+  { label: '游泳馆', to: '/spaces/swimming' },
+  { label: '体育馆', to: '/spaces/gym' },
+  { label: '龙樾博物馆', to: '/spaces/museum' },
+  { label: '攀岩墙', to: '/spaces/climbing' },
+  { label: '操场', to: '/spaces/playground' },
+  { label: '餐厅', to: '/spaces/canteen' },
+  { label: '苏园', to: '/spaces/suyuan' },
+]
+
+const eventLinks: FooterLink[] = [
+  { label: '开放日', to: '/events/open-day' },
+  { label: '研学', to: '/events/study-tour' },
+  { label: '龙市', to: '/events/dragon-market' },
+  { label: '艺术节', to: '/events/art-festival' },
+  { label: '技术节', to: '/events/tech-festival' },
+  { label: '体育节', to: '/events/sports-festival' },
+  { label: '泼水节', to: '/events/water-festival' },
+  { label: '毕业典礼', to: '/events/graduation' },
+  { label: '开学典礼', to: '/events/opening' },
+  { label: '狂欢节', to: '/events/carnival' },
+]
+
+const serviceLinks: FooterLink[] = [
+  { label: '在线点餐', to: '/services/ordering' },
+  { label: '校园卡充值', to: '/services/card-recharge' },
+  { label: '网购校服', to: '/services/uniform' },
+  { label: '家校中心', to: '/services/family-school' },
+  { label: '家长学院', to: '/services/parent-academy' },
+  { label: '校历', to: '/services/calendar' },
+]
+
+const otherLinks: FooterLink[] = [
+  { label: '芝士圈', to: '/cheese-circle' },
+  { label: '云校', to: 'https://study.shiyilongyue.com', external: true },
+  { label: '校友回忆', to: '/alumni' },
+  { label: '语言与文字', to: '/language' },
+  { label: '联系我们', to: '/contact' },
+]
+
+function FooterLinkItem({ link }: { link: FooterLink }) {
+  const className = 'text-sm text-white/80 hover:text-white transition-colors inline-flex items-center gap-1'
+
+  if (link.external) {
+    return (
+      <a href={link.to} target="_blank" rel="noopener noreferrer" className={className}>
+        {link.label}
+        <ExternalLink className="w-3 h-3" />
+      </a>
+    )
+  }
+
+  return <Link to={link.to} className={className}>{link.label}</Link>
+}
 
 export default function Footer() {
   return (
     <footer className="bg-[#D32027] text-white">
       {/* Row 1: Tagline + Logo */}
-      <div className="max-w-page mx-auto px-6 lg:px-20 pt-16 pb-12 text-center">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20 pt-16 pb-12 text-center">
         <Link to="/" className="inline-block mb-6">
           <span className="text-white font-bold text-4xl tracking-wide">未来小镇</span>
         </Link>
@@ -31,67 +96,72 @@ export default function Footer() {
       </div>
 
       {/* Divider */}
-      <div className="max-w-page mx-auto px-6 lg:px-20">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20">
         <div className="h-px bg-white/20" />
       </div>
 
       {/* Row 2: Navigation Columns */}
-      <div className="max-w-page mx-auto px-6 lg:px-20 py-12">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {footerColumns.map((column) => (
-            <div key={column.title}>
-              <h4 className="text-lg font-bold mb-4">{column.title}</h4>
-              <ul className="space-y-2">
-                {column.links.map((link) => (
-                  <li key={link}>
-                    <button className="text-sm text-white/80 hover:text-white transition-colors">
-                      {link}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-12">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-8">
+          {/* About column */}
+          <div>
+            <h4 className="text-lg font-bold mb-4">初识小镇</h4>
+            <ul className="space-y-2">
+              {aboutLinks.map((link) => (
+                <li key={link.label}><FooterLinkItem link={link} /></li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Visit column */}
+          <div>
+            <h4 className="text-lg font-bold mb-4">探访小镇</h4>
+            <ul className="space-y-2">
+              {visitLinks.slice(0, 8).map((link) => (
+                <li key={link.label}><FooterLinkItem link={link} /></li>
+              ))}
+            </ul>
+          </div>
 
           {/* Events column */}
           <div>
             <h4 className="text-lg font-bold mb-4">小镇活动</h4>
-            <div className="flex flex-wrap gap-2">
-              {footerEvents.map((event) => (
-                <button
-                  key={event}
-                  className="text-sm text-white/80 hover:text-white transition-colors"
-                >
-                  {event}
-                </button>
+            <ul className="space-y-2">
+              {eventLinks.slice(0, 8).map((link) => (
+                <li key={link.label}><FooterLinkItem link={link} /></li>
               ))}
-            </div>
+            </ul>
           </div>
 
           {/* Services column */}
           <div>
             <h4 className="text-lg font-bold mb-4">在线服务</h4>
-            <div className="flex flex-wrap gap-2">
-              {footerServices.map((service) => (
-                <button
-                  key={service}
-                  className="text-sm text-white/80 hover:text-white transition-colors"
-                >
-                  {service}
-                </button>
+            <ul className="space-y-2">
+              {serviceLinks.map((link) => (
+                <li key={link.label}><FooterLinkItem link={link} /></li>
               ))}
-            </div>
+            </ul>
+          </div>
+
+          {/* Other column */}
+          <div>
+            <h4 className="text-lg font-bold mb-4">更多</h4>
+            <ul className="space-y-2">
+              {otherLinks.map((link) => (
+                <li key={link.label}><FooterLinkItem link={link} /></li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
 
       {/* Divider */}
-      <div className="max-w-page mx-auto px-6 lg:px-20">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20">
         <div className="h-px bg-white/20" />
       </div>
 
       {/* Row 3: Bottom Bar */}
-      <div className="max-w-page mx-auto px-6 lg:px-20 py-6 flex flex-col lg:flex-row items-center justify-between gap-4">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-20 py-6 flex flex-col lg:flex-row items-center justify-between gap-4">
         {/* Social icons */}
         <div className="flex items-center gap-4">
           {/* Weibo */}
